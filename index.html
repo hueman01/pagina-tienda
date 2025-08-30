@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Mi Tienda Online</h1>
+        <div id="user-info">
+            <span id="welcome-message"></span>
+            <button id="logout-btn" class="btn-logout" style="display: none;">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+    </header>
+    <nav>
+        <a href="#" onclick="showTab('products')"><i class="fas fa-box-open"></i> Productos</a>
+        <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
+        <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
+        <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
+        <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+    </nav>
+
+    <div class="container">
+        <!-- Pestaña de Productos -->
+        <div id="products" class="tab-content active">
+            <h2>Productos</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar productos...">
+                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+            </div>
+            <div id="product-list" class="product-grid">
+                <!-- Los productos se cargarán aquí mediante JavaScript -->
+                <div class="loader">Cargando productos...</div>
+            </div>
+        </div>
+
+        <!-- Pestaña de Carrito -->
+        <div id="cart-tab" class="tab-content">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items">
+                <!-- Los items del carrito se cargarán aquí -->
+                <div class="loader">Cargando carrito...</div>
+            </div>
+            <div id="checkout-section" style="display: none;">
+                <div class="form-group">
+                    <label for="shipping-address">Dirección de envío:</label>
+                    <input type="text" id="shipping-address" required>
+                </div>
+                <button class="checkout-btn" onclick="checkout()"><i class="fas fa-check"></i> Finalizar Compra</button>
+            </div>
+        </div>
+
+        <!-- Pestaña de Pedidos -->
+        <div id="orders" class="tab-content">
+            <h2>Mis Pedidos</h2>
+            <div id="order-history">
+                <!-- El historial de pedidos se cargará aquí -->
+                <div class="login-prompt">Por favor inicie sesión para ver su historial de pedidos</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrito flotante -->
+    <div class="cart-floating">
+        <h3><i class="fas fa-shopping-cart"></i> Carrito</h3>
+        <div id="cart-summary">
+            <p>0 productos</p>
+            <p>Total: $0.00</p>
+        </div>
+        <button class="view-cart-btn" onclick="showTab('cart-tab')"><i class="fas fa-eye"></i> Ver Carrito</button>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Registro de Usuario</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Nombre:</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Contraseña:</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="regAddress">Dirección:</label>
+                    <input type="text" id="regAddress" required>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-user-plus"></i> Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mensajes flotantes -->
+    <div id="message-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
