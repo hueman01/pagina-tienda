@@ -6,6 +6,12 @@ let cart = [];
 let currentUser = null;
 let products = [];
 let authToken = localStorage.getItem('token');
+let lastPreview = null;
+let lastProductSelected = null;
+const clpFormatter = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+function formatCLP(value) {
+    return clpFormatter.format(Number(value || 0));
+}
 
 // Elementos del DOM
 const loginLink = document.getElementById('login-link');
@@ -13,6 +19,9 @@ const registerLink = document.getElementById('register-link');
 const logoutBtn = document.getElementById('logout-btn');
 const welcomeMessage = document.getElementById('welcome-message');
 const shippingAddressInput = document.getElementById('shipping-address');
+const checkoutModal = document.getElementById('checkout-modal');
+const checkoutSummary = document.getElementById('checkout-summary');
+const checkoutPdf = document.getElementById('checkout-pdf');
 
 // Inicialización de la aplicación
 document.addEventListener('DOMContentLoaded', async () => {
@@ -71,7 +80,9 @@ async function loadProducts() {
             throw new Error('Error al cargar productos');
         }
         
-        products = await response.json();
+        const data = await response.json();
+        // Aceptar arreglo directo o { items: [...] }
+        products = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
         displayProducts(products);
     } catch (error) {
         console.error('Error al cargar productos:', error);
@@ -93,13 +104,16 @@ function displayProducts(productsToDisplay) {
     productsToDisplay.forEach(product => {
         const productDiv = document.createElement('div');
         productDiv.className = 'product-card';
+        const sinStock = typeof product.Stock === 'number' && product.Stock <= 0;
+        productDiv.addEventListener('click', () => showProductDetail(product));
         productDiv.innerHTML = `
-            <img src="${product.ImagenUrl || 'http://localhost:3000/api'}" alt="${product.Nombre}">
+            <img src="${product.ImagenUrl || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${product.Nombre}">
             <h3>${product.Nombre}</h3>
-            <p class="price">$${product.Precio.toFixed(2)}</p>
+            <p class="price">${formatCLP(product.Precio)}</p>
             <p class="description">${product.Descripcion || 'Sin descripción disponible'}</p>
-            <button class="btn-primary" onclick="addToCart(${product.Id})">
-                <i class="fas fa-cart-plus"></i> Agregar al Carrito
+            <p class="stock ${sinStock ? 'stock-out' : ''}">${sinStock ? 'Agotado' : `Stock: ${product.Stock ?? 'N/D'}`}</p>
+            <button class="btn-primary add-btn" onclick="event.stopPropagation(); addToCart(${product.Id})" ${sinStock ? 'disabled' : ''}>
+                <i class="fas fa-cart-plus"></i> ${sinStock ? 'Sin stock' : 'Agregar al Carrito'}
             </button>
         `;
         productList.appendChild(productDiv);
@@ -187,11 +201,7 @@ async function loadCart() {
         }));
         
         updateCartSummary();
-        
-        // Si estamos en la pestaña del carrito, actualizar la vista
-        if (document.getElementById('cart-tab').classList.contains('active')) {
-            displayCartItems();
-        }
+        displayCartItems();
     } catch (error) {
         console.error('Error al cargar carrito:', error);
         showMessage('Error al cargar carrito', 'error');
@@ -204,12 +214,32 @@ function updateCartSummary() {
     
     document.getElementById('cart-summary').innerHTML = `
         <p>${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}</p>
-        <p>Total: $${totalPrice.toFixed(2)}</p>
+        <p>Total: ${formatCLP(totalPrice)}</p>
     `;
+    const heroTotal = document.getElementById('hero-total');
+    if (heroTotal) heroTotal.textContent = `${formatCLP(totalPrice)}`;
     
     // Mostrar/ocultar sección de checkout según si hay items
     document.getElementById('checkout-section').style.display = 
         cart.length > 0 ? 'block' : 'none';
+}
+
+function showProductDetail(product) {
+    lastProductSelected = product;
+    document.getElementById('detail-image').src = product.ImagenUrl || 'https://via.placeholder.com/500x400?text=Producto';
+    document.getElementById('detail-title').textContent = product.Nombre;
+    document.getElementById('detail-price').textContent = `${formatCLP(product.Precio)}`;
+    document.getElementById('detail-description').textContent = product.Descripcion || 'Sin descripción disponible';
+    const stockText = typeof product.Stock === 'number' ? `Stock: ${product.Stock}` : 'Stock no disponible';
+    document.getElementById('detail-stock').textContent = stockText;
+    const addBtn = document.getElementById('detail-add-btn');
+    const sinStock = typeof product.Stock === 'number' && product.Stock <= 0;
+    addBtn.disabled = sinStock;
+    addBtn.innerHTML = sinStock ? 'Sin stock' : '<i class="fas fa-cart-plus"></i> Agregar al Carrito';
+    addBtn.onclick = () => {
+        if (lastProductSelected) addToCart(lastProductSelected.Id);
+    };
+    showModal('productModal');
 }
 
 function displayCartItems() {
@@ -217,6 +247,7 @@ function displayCartItems() {
     
     if (cart.length === 0) {
         cartItemsDiv.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+        document.getElementById('cart-total-row').style.display = 'none';
         return;
     }
     
@@ -228,8 +259,9 @@ function displayCartItems() {
         itemDiv.innerHTML = `
             <div class="cart-item-info">
                 <h4>${item.product.Nombre}</h4>
-                <p>Precio unitario: $${item.product.Precio.toFixed(2)}</p>
-                <p>Total: $${(item.product.Precio * item.quantity).toFixed(2)}</p>
+                <p>Precio unitario: ${formatCLP(item.product.Precio)}</p>
+                <p>Cantidad: ${item.quantity}</p>
+                <p>Total: ${formatCLP(item.product.Precio * item.quantity)}</p>
             </div>
             <div class="cart-item-actions">
                 <button class="quantity-btn" onclick="updateCartItem(${item.product.Id}, ${item.quantity - 1})">
@@ -248,10 +280,9 @@ function displayCartItems() {
     });
     
     const totalPrice = cart.reduce((sum, item) => sum + (item.product.Precio * item.quantity), 0);
-    const totalDiv = document.createElement('div');
-    totalDiv.className = 'cart-total';
-    totalDiv.innerHTML = `<h3>Total de la compra: $${totalPrice.toFixed(2)}</h3>`;
-    cartItemsDiv.appendChild(totalDiv);
+    document.getElementById('cart-total-text').textContent = `Total de la compra: ${formatCLP(totalPrice)}`;
+    document.getElementById('cart-items-count').textContent = `${cart.length} ${cart.length === 1 ? 'producto' : 'productos'}`;
+    document.getElementById('cart-total-row').style.display = 'flex';
 }
 
 async function updateCartItem(productId, quantity) {
@@ -304,7 +335,7 @@ async function removeFromCart(productId) {
     }
 }
 
-// Finalizar compra
+// Finalizar compra: previsualizar PDF
 async function checkout() {
     if (!currentUser) {
         showModal('loginModal');
@@ -325,7 +356,7 @@ async function checkout() {
     }
     
     try {
-        const response = await fetch(`${API_BASE_URL}/orders`, {
+        const response = await fetch(`${API_BASE_URL}/orders/preview`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -337,24 +368,79 @@ async function checkout() {
         });
         
         if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Error al finalizar compra');
+            const error = await parseBodySafe(response);
+            throw new Error(error.message || `Error al previsualizar compra (status ${response.status})`);
         }
         
         const data = await response.json();
-        showMessage(`¡Compra realizada con éxito! Número de pedido: ${data.orderId}`, 'success');
-        
-        // Limpiar carrito y actualizar UI
-        cart = [];
-        updateCartSummary();
-        loadOrderHistory();
-        
-        // Volver a la pestaña de productos
-        showTab('products');
+        lastPreview = { address, pdfBase64: data.pdfBase64, total: data.total, items: data.items };
+        renderPreview(data);
+        showModal('checkout-modal');
     } catch (error) {
-        console.error('Error al finalizar compra:', error);
-        showMessage(error.message || 'Error al finalizar compra', 'error');
+        console.error('Error al previsualizar compra:', error);
+        showMessage(error.message || 'Error al previsualizar compra', 'error');
+        closeModal('checkout-modal');
     }
+}
+
+function renderPreview(data) {
+    if (!checkoutSummary || !checkoutPdf) return;
+    checkoutSummary.innerHTML = `
+        <p><strong>Dirección de envío:</strong> ${data.address}</p>
+        <p><strong>Total:</strong> ${formatCLP(data.total)}</p>
+        <h4>Productos</h4>
+        <ul>
+            ${data.items.map(i => `<li>${i.Nombre} x${i.Cantidad} - ${formatCLP(i.Precio)}</li>`).join('')}
+        </ul>
+    `;
+    checkoutPdf.src = `data:application/pdf;base64,${data.pdfBase64}`;
+}
+
+function cancelCheckout() {
+    closeModal('checkout-modal');
+    lastPreview = null;
+}
+
+async function confirmCheckout() {
+    if (!lastPreview) {
+        showMessage('No hay una previsualización activa', 'warning');
+        return;
+    }
+    try {
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({ address: lastPreview.address })
+        });
+        if (!response.ok) {
+            const error = await parseBodySafe(response);
+            throw new Error(error.message || `Error al finalizar compra (status ${response.status})`);
+        }
+        const data = await response.json();
+        downloadPdf(data.pdfBase64, `pedido-${data.orderId}.pdf`);
+        showMessage(`Compra realizada con éxito. Pedido: ${data.orderId}`, 'success');
+        closeModal('checkout-modal');
+        lastPreview = null;
+        await loadCart();
+        loadOrderHistory();
+        loadProducts();
+        showTab('orders');
+    } catch (error) {
+        console.error('Error al confirmar compra:', error);
+        showMessage(error.message || 'Error al confirmar compra', 'error');
+    }
+}
+
+function downloadPdf(base64, filename) {
+    const link = document.createElement('a');
+    link.href = `data:application/pdf;base64,${base64}`;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 }
 
 // Funciones de usuario
@@ -529,9 +615,9 @@ function displayOrderHistory(orders) {
         orderDiv.innerHTML = `
             <h3>Pedido #${order.Id}</h3>
             <p><strong>Fecha:</strong> ${new Date(order.FechaPedido).toLocaleString()}</p>
-            <p><strong>Total:</strong> $${order.Total.toFixed(2)}</p>
+            <p><strong>Total:</strong> ${formatCLP(order.Total)}</p>
             <p><strong>Estado:</strong> <span class="status-${order.Estado.toLowerCase()}">${order.Estado}</span></p>
-            <button class="btn-primary" onclick="showOrderDetails(${order.Id})">
+            <button class="btn-primary" onclick="showOrderDetails('${order.Id}')">
                 <i class="fas fa-info-circle"></i> Ver Detalles
             </button>
             <div id="order-details-${order.Id}" class="order-details" style="display:none;"></div>
@@ -564,15 +650,15 @@ async function showOrderDetails(orderId) {
             orderDetails.Items.forEach(item => {
                 itemsHtml += `
                     <li>
-                        <img src="${item.Productos.ImagenUrl || 'http://localhost:3000/api'}" alt="${item.Productos.Nombre}">
-                        ${item.Productos.Nombre} - $${item.Precio.toFixed(2)} x ${item.Cantidad}
+                        <img src="${item.Productos.ImagenUrl || 'https://via.placeholder.com/80?text=Producto'}" alt="${item.Productos.Nombre}">
+                        ${item.Productos.Nombre} - ${formatCLP(item.Precio)} x ${item.Cantidad}
                     </li>
                 `;
             });
             itemsHtml += '</ul>';
             detailsDiv.innerHTML = `
                 ${itemsHtml}
-                <p><strong>Total:</strong> $${orderDetails.Total.toFixed(2)}</p>
+                <p><strong>Total:</strong> ${formatCLP(orderDetails.Total)}</p>
                 <p><strong>Dirección de envío:</strong> ${orderDetails.DireccionEnvio}</p>
             `;
         } catch (error) {
@@ -649,3 +735,17 @@ function showMessage(message, type) {
         messageDiv.remove();
     }, 3000);
 }
+
+async function parseBodySafe(response) {
+    const text = await response.text();
+    try {
+        return JSON.parse(text);
+    } catch (e) {
+        console.error('Respuesta no JSON:', text);
+        return { message: text || 'Respuesta no valida del servidor' };
+    }
+}
+
+
+
+

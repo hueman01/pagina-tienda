@@ -23,41 +23,83 @@
         <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
         <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
         <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
-    </nav>
+</nav>
 
-    <div class="container">
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Disponible 24/7 • Entregas rápidas</p>
+            <h1>Explora, elige y recibe <span>tech</span> sin complicaciones.</h1>
+            <p class="subhead">Gadgets seleccionados, envío ágil y seguimiento en tus pedidos. Todo en un dashboard claro y moderno.</p>
+            <div class="hero-actions">
+                <button class="cta" onclick="showTab('products')"><i class="fas fa-bolt"></i> Ver catálogo</button>
+                <button class="ghost" onclick="showTab('cart-tab')"><i class="fas fa-shopping-bag"></i> Ir al carrito</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="orb orb-lg"></div>
+            <div class="orb orb-sm"></div>
+            <div class="glass-card">
+                <p class="mini-label">Estado actual</p>
+                <h3 id="hero-total">Cargando...</h3>
+                <p class="mini-text">Total en carrito</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container panels">
         <!-- Pestaña de Productoss -->
-        <div id="products" class="tab-content active">
-            <h2>Productos</h2>
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Buscar productos...">
-                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+        <div id="products" class="tab-content active panel">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">Catálogo</p>
+                    <h2>Productos</h2>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Buscar productos...">
+                    <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+                </div>
             </div>
             <div id="product-list" class="product-grid">
                 <!-- Los productoss se cargarán aquí mediante JavaScript -->
-                <div class="loader">Cargando productoss...</div>
+                <div class="loader">Cargando productos...</div>
             </div>
         </div>
 
         <!-- Pestaña de Carrito -->
-        <div id="cart-tab" class="tab-content">
-            <h2>Carrito de Compras</h2>
+        <div id="cart-tab" class="tab-content panel">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">Resumen</p>
+                    <h2>Carrito de Compras</h2>
+                </div>
+            </div>
             <div id="cart-items">
                 <!-- Los items del carrito se cargarán aquí -->
                 <div class="loader">Cargando carrito...</div>
             </div>
+            <div id="cart-total-row" class="cart-total-row" style="display:none;">
+                <div>
+                    <p id="cart-items-count"></p>
+                    <h3 id="cart-total-text"></h3>
+                </div>
+            </div>
             <div id="checkout-section" style="display: none;">
                 <div class="form-group">
                     <label for="shipping-address">Dirección de envío:</label>
-                    <input type="text" id="shipping-address" required>
+                    <input type="text" id="shipping-address" required placeholder="Calle, número, ciudad">
                 </div>
                 <button class="checkout-btn" onclick="checkout()"><i class="fas fa-check"></i> Finalizar Compra</button>
             </div>
         </div>
 
         <!-- Pestaña de Pedidos -->
-        <div id="orders" class="tab-content">
-            <h2>Mis Pedidos</h2>
+        <div id="orders" class="tab-content panel">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow">Seguimiento</p>
+                    <h2>Mis Pedidos</h2>
+                </div>
+            </div>
             <div id="order-history">
                 <!-- El historial de pedidos se cargará aquí -->
                 <div class="login-prompt">Por favor inicie sesión para ver su historial de pedidos</div>
@@ -121,8 +163,46 @@
         </div>
     </div>
 
+    <!-- Modal de detalle de producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content modal-product">
+            <span class="close" onclick="closeModal('productModal')">&times;</span>
+            <div class="product-modal-body">
+                <div class="product-modal-image">
+                    <img id="detail-image" src="" alt="Producto">
+                </div>
+                <div class="product-modal-info">
+                    <p class="eyebrow" id="detail-category">Producto</p>
+                    <h2 id="detail-title"></h2>
+                    <p class="price" id="detail-price"></p>
+                    <p class="description" id="detail-description"></p>
+                    <p class="stock" id="detail-stock"></p>
+                    <button id="detail-add-btn" class="btn-primary">
+                        <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mensajes flotantes -->
     <div id="message-container"></div>
+
+    <!-- Modal de confirmación y PDF -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content modal-lg">
+            <span class="close" onclick="closeModal('checkout-modal')">&times;</span>
+            <h2><i class="fas fa-file-pdf"></i> Confirmar Compra</h2>
+            <div id="checkout-preview">
+                <div id="checkout-summary"></div>
+                <iframe id="checkout-pdf" title="Resumen de compra" class="pdf-frame"></iframe>
+            </div>
+            <div class="modal-actions">
+                <button id="btn-modal-cancelar" class="btn-secondary" onclick="cancelCheckout()">Cancelar</button>
+                <button id="btn-modal-confirmar" class="btn-primary" onclick="confirmCheckout()">Finalizar y descargar</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
