@@ -1,5 +1,5 @@
 // Configuración de la API
-const API_BASE_URL = 'https://tienda-api-copia-lzcs.onrender.com';
+const API_BASE_URL = 'https://tienda-api-copia-lzcs.onrender.com/api';
 // const API_BASE_URL = 'http://localhost:3000/api';
 
 // Variables globales
