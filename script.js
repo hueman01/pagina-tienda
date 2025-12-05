@@ -694,6 +694,7 @@ function showTab(tabId) {
     
     // Mostrar la pestaña seleccionada
     document.getElementById(tabId).classList.add('active');
+    closeNav();
 }
 
 function showModal(modalId) {
@@ -702,6 +703,20 @@ function showModal(modalId) {
 
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
+}
+
+function toggleNav() {
+    const nav = document.querySelector('nav');
+    if (nav) {
+        nav.classList.toggle('open');
+    }
+}
+
+function closeNav() {
+    const nav = document.querySelector('nav');
+    if (nav) {
+        nav.classList.remove('open');
+    }
 }
 
 function showLoader(elementId) {

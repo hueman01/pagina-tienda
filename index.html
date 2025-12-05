@@ -18,11 +18,16 @@
         </div>
     </header>
     <nav>
-        <a href="#" onclick="showTab('products')"><i class="fas fa-box-open"></i> Productos</a>
-        <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
-        <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
-        <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
-        <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Abrir menú de navegación">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links">
+            <a href="#" onclick="showTab('products')"><i class="fas fa-box-open"></i> Productos</a>
+            <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
+            <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
+            <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
+            <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+        </div>
 </nav>
 
     <section class="hero">
