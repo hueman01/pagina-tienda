@@ -1,4 +1,4 @@
-// Configuración de la API
+﻿// ConfiguraciÃ³n de la API
 const API_BASE_URL = 'https://tienda-api-copia-lzcs.onrender.com/api';
 // const API_BASE_URL = 'http://localhost:3000/api';
 
@@ -24,11 +24,11 @@ const checkoutModal = document.getElementById('checkout-modal');
 const checkoutSummary = document.getElementById('checkout-summary');
 const checkoutPdf = document.getElementById('checkout-pdf');
 
-// Inicialización de la aplicación
+// InicializaciÃ³n de la aplicaciÃ³n
 document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
     
-    // Verificar si hay un token de autenticación
+    // Verificar si hay un token de autenticaciÃ³n
     if (authToken) {
         try {
             await fetchUserProfile();
@@ -58,12 +58,12 @@ function setupEventListeners() {
         await loginUser();
     });
     
-    // Botón de logout
+    // BotÃ³n de logout
     if (logoutBtn) {
         logoutBtn.addEventListener('click', logout);
     }
     
-    // Barra de búsqueda
+    // Barra de bÃºsqueda
     document.getElementById('search-input').addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
             searchProducts();
@@ -71,7 +71,7 @@ function setupEventListeners() {
     });
 }
 
-// Función para cargar productos desde la API
+// FunciÃ³n para cargar productos desde la API
 async function loadProducts() {
     try {
         showLoader('product-list');
@@ -87,11 +87,11 @@ async function loadProducts() {
         displayProducts(products);
     } catch (error) {
         console.error('Error al cargar productos:', error);
-        showError('product-list', 'Error al cargar productos. Por favor intente más tarde.');
+        showError('product-list', 'Error al cargar productos. Por favor intente mÃ¡s tarde.');
     }
 }
 
-// Mostrar productos en la página
+// Mostrar productos en la pÃ¡gina
 function displayProducts(productsToDisplay) {
     const productList = document.getElementById('product-list');
     
@@ -111,7 +111,7 @@ function displayProducts(productsToDisplay) {
             <img src="${product.ImagenUrl || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${product.Nombre}">
             <h3>${product.Nombre}</h3>
             <p class="price">${formatCLP(product.Precio)}</p>
-            <p class="description">${product.Descripcion || 'Sin descripción disponible'}</p>
+            <p class="description">${product.Descripcion || 'Sin descripciÃ³n disponible'}</p>
             <p class="stock ${sinStock ? 'stock-out' : ''}">${sinStock ? 'Agotado' : `Stock: ${product.Stock ?? 'N/D'}`}</p>
             <button class="btn-primary add-btn" onclick="event.stopPropagation(); addToCart(${product.Id})" ${sinStock ? 'disabled' : ''}>
                 <i class="fas fa-cart-plus"></i> ${sinStock ? 'Sin stock' : 'Agregar al Carrito'}
@@ -142,7 +142,7 @@ function searchProducts() {
 async function addToCart(productId) {
     if (!currentUser) {
         showModal('loginModal');
-        showMessage('Por favor inicie sesión para agregar productos al carrito', 'info');
+        showMessage('Por favor inicie sesiÃ³n para agregar productos al carrito', 'info');
         return;
     }
     
@@ -220,7 +220,7 @@ function updateCartSummary() {
     const heroTotal = document.getElementById('hero-total');
     if (heroTotal) heroTotal.textContent = `${formatCLP(totalPrice)}`;
     
-    // Mostrar/ocultar sección de checkout según si hay items
+    // Mostrar/ocultar secciÃ³n de checkout segÃºn si hay items
     document.getElementById('checkout-section').style.display = 
         cart.length > 0 ? 'block' : 'none';
 }
@@ -230,7 +230,7 @@ function showProductDetail(product) {
     document.getElementById('detail-image').src = product.ImagenUrl || 'https://via.placeholder.com/500x400?text=Producto';
     document.getElementById('detail-title').textContent = product.Nombre;
     document.getElementById('detail-price').textContent = `${formatCLP(product.Precio)}`;
-    document.getElementById('detail-description').textContent = product.Descripcion || 'Sin descripción disponible';
+    document.getElementById('detail-description').textContent = product.Descripcion || 'Sin descripciÃ³n disponible';
     const stockText = typeof product.Stock === 'number' ? `Stock: ${product.Stock}` : 'Stock no disponible';
     document.getElementById('detail-stock').textContent = stockText;
     const addBtn = document.getElementById('detail-add-btn');
@@ -247,7 +247,7 @@ function displayCartItems() {
     const cartItemsDiv = document.getElementById('cart-items');
     
     if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+        cartItemsDiv.innerHTML = '<div class="empty-cart">Tu carrito estÃ¡ vacÃ­o</div>';
         document.getElementById('cart-total-row').style.display = 'none';
         return;
     }
@@ -340,19 +340,19 @@ async function removeFromCart(productId) {
 async function checkout() {
     if (!currentUser) {
         showModal('loginModal');
-        showMessage('Por favor inicie sesión para finalizar la compra', 'info');
+        showMessage('Por favor inicie sesiÃ³n para finalizar la compra', 'info');
         return;
     }
     
     if (cart.length === 0) {
-        showMessage('Tu carrito está vacío', 'info');
+        showMessage('Tu carrito estÃ¡ vacÃ­o', 'info');
         return;
     }
     
     const address = shippingAddressInput.value || currentUser.Direccion;
     
     if (!address) {
-        showMessage('Por favor ingrese una dirección de envío', 'error');
+        showMessage('Por favor ingrese una direcciÃ³n de envÃ­o', 'error');
         return;
     }
     
@@ -387,7 +387,7 @@ async function checkout() {
 function renderPreview(data) {
     if (!checkoutSummary || !checkoutPdf) return;
     checkoutSummary.innerHTML = `
-        <p><strong>Dirección de envío:</strong> ${data.address}</p>
+        <p><strong>DirecciÃ³n de envÃ­o:</strong> ${data.address}</p>
         <p><strong>Total:</strong> ${formatCLP(data.total)}</p>
         <h4>Productos</h4>
         <ul>
@@ -404,7 +404,7 @@ function cancelCheckout() {
 
 async function confirmCheckout() {
     if (!lastPreview) {
-        showMessage('No hay una previsualización activa', 'warning');
+        showMessage('No hay una previsualizaciÃ³n activa', 'warning');
         return;
     }
     try {
@@ -422,7 +422,7 @@ async function confirmCheckout() {
         }
         const data = await response.json();
         downloadPdf(data.pdfBase64, `pedido-${data.orderId}.pdf`);
-        showMessage(`Compra realizada con éxito. Pedido: ${data.orderId}`, 'success');
+        showMessage(`Compra realizada con Ã©xito. Pedido: ${data.orderId}`, 'success');
         closeModal('checkout-modal');
         lastPreview = null;
         await loadCart();
@@ -510,7 +510,7 @@ async function loginUser() {
         
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || 'Error al iniciar sesión');
+            throw new Error(error.message || 'Error al iniciar sesiÃ³n');
         }
         
         const data = await response.json();
@@ -530,8 +530,8 @@ async function loginUser() {
         await loadCart();
         loadOrderHistory();
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        showMessage(error.message || 'Error al iniciar sesión', 'error');
+        console.error('Error al iniciar sesiÃ³n:', error);
+        showMessage(error.message || 'Error al iniciar sesiÃ³n', 'error');
     }
 }
 
@@ -564,10 +564,10 @@ function logout() {
     updateCartSummary();
     loadOrderHistory();
     
-    // Mostrar pestaña de productos
+    // Mostrar pestaÃ±a de productos
     showTab('products');
     
-    showMessage('Sesión cerrada correctamente', 'info');
+    showMessage('SesiÃ³n cerrada correctamente', 'info');
 }
 
 // Historial de pedidos
@@ -575,7 +575,7 @@ async function loadOrderHistory() {
     const orderHistoryDiv = document.getElementById('order-history');
     
     if (!currentUser) {
-        orderHistoryDiv.innerHTML = '<div class="login-prompt">Por favor inicie sesión para ver su historial de pedidos</div>';
+        orderHistoryDiv.innerHTML = '<div class="login-prompt">Por favor inicie sesiÃ³n para ver su historial de pedidos</div>';
         return;
     }
     
@@ -657,10 +657,11 @@ async function showOrderDetails(orderId) {
                 `;
             });
             itemsHtml += '</ul>';
-            detailsDiv.innerHTML = `
+                        detailsDiv.innerHTML = `
                 ${itemsHtml}
                 <p><strong>Total:</strong> ${formatCLP(orderDetails.Total)}</p>
-                <p><strong>Dirección de envío:</strong> ${orderDetails.DireccionEnvio}</p>
+                <p><strong>Direccion de envio:</strong> ${orderDetails.DireccionEnvio}</p>
+                ${orderDetails.hasInvoice ? `<button class="btn-secondary" onclick="downloadInvoice('${orderId}')"><i class="fas fa-file-pdf"></i> Ver boleta</button>` : ''}
             `;
         } catch (error) {
             console.error('Error al cargar detalles del pedido:', error);
@@ -687,12 +688,12 @@ function updateUI() {
 }
 
 function showTab(tabId) {
-    // Ocultar todas las pestañas
+    // Ocultar todas las pestaÃ±as
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
     });
     
-    // Mostrar la pestaña seleccionada
+    // Mostrar la pestaÃ±a seleccionada
     document.getElementById(tabId).classList.add('active');
     closeNav();
 }
@@ -746,7 +747,7 @@ function showMessage(message, type) {
     
     messageContainer.appendChild(messageDiv);
     
-    // Eliminar el mensaje después de 3 segundos
+    // Eliminar el mensaje despuÃ©s de 3 segundos
     setTimeout(() => {
         messageDiv.remove();
     }, 3000);
@@ -763,5 +764,27 @@ async function parseBodySafe(response) {
 }
 
 
+
+
+
+
+async function downloadInvoice(orderId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/orders/${orderId}/invoice`, {
+            headers: {
+                "Authorization": `Bearer ${authToken}`
+            }
+        });
+        if (!response.ok) {
+            const err = await parseBodySafe(response);
+            throw new Error(err.message || "No se pudo obtener la boleta");
+        }
+        const data = await response.json();
+        downloadPdf(data.pdfBase64, data.filename || `pedido-${orderId}.pdf`);
+    } catch (error) {
+        console.error("Error al descargar boleta:", error);
+        showMessage(error.message || "Error al descargar boleta", "error");
+    }
+}
 
 

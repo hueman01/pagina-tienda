@@ -135,16 +135,18 @@ nav.open .nav-links {
 /* Barra de busqueda */
 .search-bar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem;
     margin: 1rem 0;
+    width: 100%;
 }
 
 .search-bar input {
-    flex: 1 1 220px;
-    padding: 0.85rem 1rem;
+    flex: 1 1 240px;
+    padding: 0.95rem 1rem;
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
+    border-radius: 14px;
     font-size: 1rem;
     background: #0c1220;
     color: #f5f7fb;
@@ -152,9 +154,10 @@ nav.open .nav-links {
 
 .search-bar button {
     padding: 0.9rem 1.3rem;
+    min-width: 64px;
     background: linear-gradient(90deg, #b5ff30, #6fe000);
     color: #0b0f17;
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 .search-bar button:hover {
@@ -694,7 +697,6 @@ button {
     .nav-toggle { width: 100%; }
     .nav-links { gap: 0.35rem; }
     button, .submit-btn, .checkout-btn { width: 100%; }
-    .search-bar { flex-direction: column; }
 }
 
 /* Hero */
