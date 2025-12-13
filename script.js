@@ -14,6 +14,44 @@ function formatCLP(value) {
     return clpFormatter.format(Number(value || 0));
 }
 
+// Genera y ubica el comentario de versión en el <head> a partir de version.txt (o la fecha del documento como respaldo).
+async function updateVersionComment() {
+    const head = document.head;
+    if (!head) return;
+
+    const version = await fetchCurrentVersion();
+    const headNodes = Array.from(head.childNodes);
+    const existing = headNodes.find((node) => node.nodeType === Node.COMMENT_NODE && /version:/i.test(node.data));
+
+    if (existing) {
+        existing.data = ` version: ${version} `;
+    } else {
+        const comment = document.createComment(` version: ${version} `);
+        const firstStylesheet = head.querySelector('link[rel="stylesheet"]');
+        head.insertBefore(comment, firstStylesheet || head.firstChild);
+    }
+}
+
+async function fetchCurrentVersion() {
+    try {
+        const response = await fetch('version.txt', { cache: 'no-cache' });
+        if (response.ok) {
+            const text = (await response.text()).trim();
+            if (/^v\d{4}\.\d{2}\.\d{2}$/.test(text)) {
+                return text;
+            }
+        }
+    } catch (error) {
+        console.warn('No se pudo cargar version.txt, se usará la versión de respaldo.', error);
+    }
+    return formatLastModifiedVersion();
+}
+
+function formatLastModifiedVersion() {
+    const d = new Date(document.lastModified || Date.now());
+    const pad = (num) => String(num).padStart(2, '0');
+    return `v${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`;
+}
 // Elementos del DOM
 const loginLink = document.getElementById('login-link');
 const registerLink = document.getElementById('register-link');
@@ -26,6 +64,7 @@ const checkoutPdf = document.getElementById('checkout-pdf');
 
 // InicializaciÃ³n de la aplicaciÃ³n
 document.addEventListener('DOMContentLoaded', async () => {
+    await updateVersionComment();
     setupEventListeners();
     
     // Verificar si hay un token de autenticaciÃ³n
@@ -786,5 +825,10 @@ async function downloadInvoice(orderId) {
         showMessage(error.message || "Error al descargar boleta", "error");
     }
 }
+
+
+
+
+
 
 

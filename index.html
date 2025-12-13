@@ -1,25 +1,28 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Tienda Online</title>
-    <!-- version: v1.1.2 -->
+    <!-- version: auto -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Mi Tienda Online</h1>
+        <div class="brand">
+            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo">
+            <h1>Mi Tienda Online</h1>
+        </div>
         <div id="user-info">
             <span id="welcome-message"></span>
             <button id="logout-btn" class="btn-logout" style="display: none;">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
             </button>
         </div>
     </header>
     <nav>
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Abrir menú de navegación">
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Abrir menÃº de navegaciÃ³n">
             <i class="fas fa-bars"></i>
         </button>
         <div class="nav-links">
@@ -27,37 +30,28 @@
             <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
             <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
             <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
-            <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+            <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar SesiÃ³n</a>
         </div>
 </nav>
 
-    <section class="hero">
+        <section class="hero">
         <div class="hero-content">
             <p class="eyebrow">Disponible 24/7 • Entregas rápidas</p>
             <h1>Explora, elige y recibe <span>tech</span> sin complicaciones.</h1>
             <p class="subhead">Gadgets seleccionados, envío ágil y seguimiento en tus pedidos. Todo en un dashboard claro y moderno.</p>
             <div class="hero-actions">
-                <button class="cta" onclick="showTab('products')"><i class="fas fa-bolt"></i> Ver catálogo</button>
-                <button class="ghost" onclick="showTab('cart-tab')"><i class="fas fa-shopping-bag"></i> Ir al carrito</button>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="orb orb-lg"></div>
-            <div class="orb orb-sm"></div>
-            <div class="glass-card">
-                <p class="mini-label">Estado actual</p>
-                <h3 id="hero-total">Cargando...</h3>
-                <p class="mini-text">Total en carrito</p>
+                <button class="cta" onclick="showTab('products')" aria-label="Ver catálogo"><i class="fas fa-bolt"></i> Ver catálogo</button>
+                <button class="ghost" onclick="showTab('cart-tab')" aria-label="Ir al carrito"><i class="fas fa-shopping-bag"></i> Ir al carrito</button>
             </div>
         </div>
     </section>
 
     <div class="container panels">
-        <!-- Pestaña de Productoss -->
+        <!-- PestaÃ±a de Productoss -->
         <div id="products" class="tab-content active panel">
             <div class="panel-header">
                 <div>
-                    <p class="eyebrow">Catálogo</p>
+                    <p class="eyebrow">CatÃ¡logo</p>
                     <h2>Productos</h2>
                 </div>
                 <div class="search-bar">
@@ -66,12 +60,12 @@
                 </div>
             </div>
             <div id="product-list" class="product-grid">
-                <!-- Los productoss se cargarán aquí mediante JavaScript -->
+                <!-- Los productoss se cargarÃ¡n aquÃ­ mediante JavaScript -->
                 <div class="loader">Cargando productos...</div>
             </div>
         </div>
 
-        <!-- Pestaña de Carrito -->
+        <!-- PestaÃ±a de Carrito -->
         <div id="cart-tab" class="tab-content panel">
             <div class="panel-header">
                 <div>
@@ -80,7 +74,7 @@
                 </div>
             </div>
             <div id="cart-items">
-                <!-- Los items del carrito se cargarán aquí -->
+                <!-- Los items del carrito se cargarÃ¡n aquÃ­ -->
                 <div class="loader">Cargando carrito...</div>
             </div>
             <div id="cart-total-row" class="cart-total-row" style="display:none;">
@@ -91,14 +85,14 @@
             </div>
             <div id="checkout-section" style="display: none;">
                 <div class="form-group">
-                    <label for="shipping-address">Dirección de envío:</label>
-                    <input type="text" id="shipping-address" required placeholder="Calle, número, ciudad">
+                    <label for="shipping-address">Direccion de envi­o:</label>
+                    <input type="text" id="shipping-address" required placeholder="Calle, nÃºmero, ciudad">
                 </div>
                 <button class="checkout-btn" onclick="checkout()"><i class="fas fa-check"></i> Finalizar Compra</button>
             </div>
         </div>
 
-        <!-- Pestaña de Pedidos -->
+        <!-- PestaÃ±a de Pedidos -->
         <div id="orders" class="tab-content panel">
             <div class="panel-header">
                 <div>
@@ -107,8 +101,8 @@
                 </div>
             </div>
             <div id="order-history">
-                <!-- El historial de pedidos se cargará aquí -->
-                <div class="login-prompt">Por favor inicie sesión para ver su historial de pedidos</div>
+                <!-- El historial de pedidos se cargarÃ¡ aquÃ­ -->
+                <div class="login-prompt">Por favor inicie sesion para ver su historial de pedidos</div>
             </div>
         </div>
     </div>
@@ -142,7 +136,7 @@
                     <input type="password" id="regPassword" required>
                 </div>
                 <div class="form-group">
-                    <label for="regAddress">Dirección:</label>
+                    <label for="regAddress">Direccion:</label>
                     <input type="text" id="regAddress" required>
                 </div>
                 <button type="submit" class="submit-btn"><i class="fas fa-user-plus"></i> Registrarse</button>
@@ -154,7 +148,7 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+            <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesion</h2>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="loginEmail">Email:</label>
@@ -164,7 +158,7 @@
                     <label for="loginPassword">Contraseña:</label>
                     <input type="password" id="loginPassword" required>
                 </div>
-                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt"></i> Iniciar SesiÃ³n</button>
             </form>
         </div>
     </div>
@@ -194,7 +188,7 @@
     <!-- Mensajes flotantes -->
     <div id="message-container"></div>
 
-    <!-- Modal de confirmación y PDF -->
+    <!-- Modal de confirmaciÃ³n y PDF -->
     <div id="checkout-modal" class="modal">
         <div class="modal-content modal-lg">
             <span class="close" onclick="closeModal('checkout-modal')">&times;</span>
@@ -213,3 +207,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
