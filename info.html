@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Información | Mi Tienda Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="info-page">
+    <header>
+        <div class="brand">
+            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo">
+            <h1>Centro de Información</h1>
+        </div>
+        <div class="info-actions">
+            <a class="btn-primary" href="index.html"><i class="fas fa-store"></i> Volver a la tienda</a>
+        </div>
+    </header>
+
+    <main class="info-main">
+        <section class="info-hero">
+            <div>
+                <p class="eyebrow">Ayuda y transparencia</p>
+                <h2>Todo lo que necesitas saber</h2>
+                <p class="subhead">Encuentra las políticas, beneficios y guías para comprar con confianza.</p>
+            </div>
+        </section>
+
+        <section class="info-grid">
+            <article class="info-card" id="centro-ayuda">
+                <h3><i class="fas fa-life-ring"></i> Centro de ayuda</h3>
+                <p class="info-text" data-field="centroAyuda"></p>
+            </article>
+            <article class="info-card" id="preguntas-frecuentes">
+                <h3><i class="fas fa-question-circle"></i> Preguntas frecuentes</h3>
+                <p class="info-text" data-field="preguntasFrecuentes"></p>
+            </article>
+            <article class="info-card" id="terminos-condiciones">
+                <h3><i class="fas fa-file-contract"></i> Términos y condiciones</h3>
+                <p class="info-text" data-field="terminosCondiciones"></p>
+            </article>
+            <article class="info-card" id="quienes-somos">
+                <h3><i class="fas fa-users"></i> Quiénes somos</h3>
+                <p class="info-text" data-field="quienesSomos"></p>
+            </article>
+            <article class="info-card" id="beneficios-comprar">
+                <h3><i class="fas fa-gift"></i> Beneficios de comprar</h3>
+                <p class="info-text" data-field="beneficiosComprar"></p>
+            </article>
+            <article class="info-card" id="privacidad-seguridad">
+                <h3><i class="fas fa-shield-alt"></i> Privacidad y seguridad</h3>
+                <p class="info-text" data-field="privacidadSeguridad"></p>
+            </article>
+            <article class="info-card" id="consejos-tecnologicos">
+                <h3><i class="fas fa-lightbulb"></i> Consejos tecnológicos</h3>
+                <p class="info-text" data-field="consejosTecnologicos"></p>
+            </article>
+            <article class="info-card" id="puntos-verdes">
+                <h3><i class="fas fa-recycle"></i> Puntos verdes</h3>
+                <p class="info-text" data-field="puntosVerdes"></p>
+            </article>
+        </section>
+
+        <section class="info-meta">
+            <p id="info-updated"></p>
+            <p id="info-error" class="info-error"></p>
+        </section>
+    </main>
+
+    <script src="info.js"></script>
+</body>
+</html>
