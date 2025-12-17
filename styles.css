@@ -24,8 +24,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
     z-index: 900;
 }
 
@@ -78,8 +76,6 @@ nav {
     background-color: #0b1018;
     padding: 1rem 1.5rem;
     gap: 1rem;
-    position: sticky;
-    top: 74px;
     z-index: 800;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
@@ -94,25 +90,26 @@ nav {
 }
 
 nav a {
-    color: #e5e7eb;
+    color: #f8fafc;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.1rem;
     border-radius: 999px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.3px;
 }
 
 nav a:hover {
-    background-color: rgba(255,255,255,0.06);
-    color: #b5ff30;
+    background-color: rgba(255,255,255,0.1);
+    color: #ffffff;
 }
 
 nav a i {
     font-size: 1rem;
+    color: #f8fafc;
 }
 
 .nav-toggle {
@@ -127,6 +124,118 @@ nav a i {
 
 nav.open .nav-links {
     display: flex;
+}
+.nav-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: linear-gradient(180deg, #ffffff, #f3f4f6);
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+    color: #0f172a;
+    min-height: 62px;
+}
+
+.nav-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.05rem;
+    padding: 0 0.35rem;
+}
+
+.nav-block-label {
+    font-size: 0.82rem;
+    color: #6b7280;
+    line-height: 1.1;
+}
+
+.nav-block-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.nav-session {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #0f172a;
+    gap: 0.35rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.nav-session i {
+    font-size: 0.8rem;
+    color: #4b5563;
+}
+
+.nav-link-ghost {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.nav-link-ghost:hover,
+.nav-session:hover {
+    color: #111827;
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    color: #0f172a;
+    padding: 0.25rem 0.35rem;
+    border-radius: 12px;
+}
+
+.nav-icon-btn:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-cart {
+    position: relative;
+    background: linear-gradient(180deg, #ffffff, #f1f5f9);
+    color: #0f172a;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.nav-cart:hover {
+    background: #f3f4f6;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    background: #1f2937;
+    color: #ffffff;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-divider {
+    width: 1px;
+    height: 30px;
+    background: #e5e7eb;
+    display: block;
 }
 
 /* Contenedor principal */
@@ -684,6 +793,12 @@ button {
     nav.open { align-items: flex-start; }
     nav.open .nav-links { display: flex; }
     nav a { width: 100%; justify-content: flex-start; }
+    .nav-actions {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        padding: 0.65rem 0.75rem;
+    }
     .cart-floating {
         left: 1rem;
         right: 1rem;
@@ -705,6 +820,7 @@ button {
 @media (max-width: 560px) {
     body { font-size: 0.98rem; }
     nav { padding: 0.9rem 1rem; }
+    .nav-actions { justify-content: center; }
     .product-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
     .cart-floating { grid-template-columns: 1fr; position: fixed; }
     .panel { padding: 1.25rem; }
@@ -1166,3 +1282,577 @@ button {
     color: #ff9f9f;
 }
 
+.info-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.legal-section {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.legal-card {
+    background: #f6f7fb;
+    color: #111827;
+    border: 1px solid #d6deeb;
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.legal-card__header {
+    text-align: center;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #e5eaf5;
+}
+
+.legal-card__header h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
+}
+
+.legal-card__header i {
+    color: #0f172a;
+}
+
+/* Términos y condiciones - header en azul */
+.ter-con-page .legal-card {
+    background: #f6f7fb;
+}
+
+.ter-con-page .legal-card__header {
+    background: linear-gradient(90deg, #0040ff, #0b36d9);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ter-con-page .legal-card__header h3,
+.ter-con-page .legal-card__header i {
+    color: #ffffff;
+}
+
+/* Quiénes somos - header en azul */
+.quienes-page .legal-card {
+    background: #f6f7fb;
+}
+
+.quienes-page .legal-card__header {
+    background: linear-gradient(90deg, #0040ff, #0b36d9);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.quienes-page .legal-card__header h3,
+.quienes-page .legal-card__header i {
+    color: #ffffff;
+}
+
+/* Quiénes somos layout */
+.quienes-main {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.quienes-hero {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 220px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: linear-gradient(180deg, #0b1018, #0c1523);
+}
+
+.quienes-hero img {
+    width: 30%;
+    max-width: 520px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.45);
+}
+
+.quienes-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 11, 18, 0.15), rgba(7, 11, 18, 0.5));
+}
+
+.quienes-hero__breadcrumb {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    color: #e9edf5;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.35rem 0.75rem;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.quienes-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.quienes-card {
+    background: #f6f7fb;
+    border: 1px solid #d6deeb;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    display: grid;
+    gap: 0.9rem;
+}
+
+.history-card header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.quienes-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #22c55e;
+    display: grid;
+    place-items: center;
+    color: #0b111c;
+    font-size: 1.2rem;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.quienes-text {
+    color: #0f172a;
+    line-height: 1.6;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.stats-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+}
+
+.stat {
+    background: #c6f6d5;
+    color: #0f172a;
+    border-radius: 12px;
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.25rem;
+    text-align: center;
+    border: 1px solid #b5efc6;
+}
+
+.stat-number {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #047857;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+}
+
+.quienes-highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.highlight-card {
+    background: #f6f7fb;
+    border: 1px solid #d6deeb;
+    border-radius: 14px;
+    padding: 1.2rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    display: grid;
+    gap: 0.6rem;
+    color: #0f172a;
+}
+
+.highlight-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #e0f2fe;
+    color: #0c4a6e;
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+}
+
+.image-card img {
+    width: 100%;
+    max-width: 50%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+.quienes-valores {
+    background: #f6f7fb;
+    border: 1px solid #d6deeb;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    display: grid;
+    gap: 0.9rem;
+    color: #0f172a;
+}
+
+.quienes-valores header {
+    text-align: center;
+    display: grid;
+    gap: 0.3rem;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    align-items: stretch;
+}
+
+.valor {
+    background: #ffffff;
+    border: 1px solid #e5eaf5;
+    border-radius: 12px;
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.4rem;
+    justify-items: center;
+    text-align: center;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.valor-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: #0f172a;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.soft-blue { background: #dbeafe; }
+.soft-green { background: #d1fae5; }
+.soft-red { background: #ffe4e6; }
+.soft-yellow { background: #fef9c3; }
+.soft-pink { background: #fde2ff; }
+
+@media (max-width: 900px) {
+    .quienes-grid {
+        grid-template-columns: 1fr;
+    }
+    .quienes-hero img {
+        width: 70%;
+    }
+}
+
+/* Beneficios de comprar - header en azul */
+.beneficios-page .legal-card {
+    background: #f6f7fb;
+}
+
+.beneficios-page .legal-card__header {
+    background: linear-gradient(90deg, #0040ff, #0b36d9);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.beneficios-page .legal-card__header h3,
+.beneficios-page .legal-card__header i {
+    color: #ffffff;
+}
+
+/* Beneficios de comprar - layout personalizado */
+.beneficios-main {
+    display: grid;
+    gap: 1.4rem;
+}
+
+.beneficios-hero {
+    background: #3fd16b;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    display: grid;
+    gap: 0.6rem;
+}
+
+.beneficios-hero__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: #d9ff80;
+    color: #0b111c;
+    font-weight: 800;
+    padding: 0.45rem 0.8rem;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.beneficios-hero__intro {
+    color: #0b111c;
+    font-size: 0.98rem;
+}
+
+.beneficios-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.beneficio-card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #c8f0d4;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+    padding: 1rem;
+}
+
+.beneficio-icon {
+    display: grid;
+    place-items: center;
+}
+
+.beneficio-icon img {
+    width: 84px;
+    height: auto;
+}
+
+.beneficio-icon i {
+    font-size: 2.1rem;
+    color: #1f7a3a;
+}
+
+.beneficio-body {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.beneficio-header {
+    background: #32c96c;
+    color: #ffffff;
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.beneficio-content {
+    color: #0f172a;
+    line-height: 1.6;
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+}
+
+.beneficio-content small {
+    color: #64748b;
+}
+
+@media (max-width: 720px) {
+    .beneficio-card {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+    .beneficio-icon {
+        justify-items: start;
+    }
+}
+
+.legal-card__body {
+    padding-top: 1rem;
+    line-height: 1.7;
+    color: #111827;
+    font-size: 1rem;
+}
+
+.legal-card__body h4 {
+    margin: 1rem 0 0.35rem;
+    font-size: 1.05rem;
+    color: #0f172a;
+}
+
+.legal-card__body p {
+    margin: 0.4rem 0;
+}
+
+.legal-card__body ul {
+    padding-left: 1.25rem;
+    margin: 0.35rem 0 0.75rem;
+}
+
+.legal-card__body li {
+    margin-bottom: 0.4rem;
+}
+
+.legal-card__body a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* Consejos tecnológicos - layout personalizado */
+.guide-hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: center;
+    gap: 1.5rem;
+    background: linear-gradient(90deg, #003cff, #0030c7);
+    border-radius: 14px;
+    padding: 1.6rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.guide-hero__text {
+    color: #e9f1ff;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.guide-hero__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #d1f51c;
+    color: #0b1432;
+    padding: 0.55rem 0.9rem;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: none;
+    letter-spacing: 0.2px;
+    width: fit-content;
+}
+
+.guide-hero__text h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    color: #fff;
+}
+
+.guide-hero__text p {
+    margin: 0;
+    color: #dbe6ff;
+    max-width: 640px;
+}
+
+.guide-hero__image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.guide-hero__image img {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+
+.guide-section {
+    margin-top: 2rem;
+    background: linear-gradient(145deg, #0f1624, #0b111c);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.6rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    display: grid;
+    gap: 1.4rem;
+}
+
+.guide-section__heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #e9edf5;
+}
+
+.guide-icon {
+    width: 64px;
+    height: 64px;
+    background: #22c55e;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: #0b111c;
+    font-size: 1.6rem;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+.guide-section__heading h3 {
+    margin: 0.1rem 0 0;
+    font-size: 1.35rem;
+}
+
+.guide-section__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.4rem;
+    align-items: start;
+}
+
+.guide-section__text {
+    color: #d5e1f2;
+    display: grid;
+    gap: 0.8rem;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.guide-bullets {
+    list-style: disc;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.guide-section__image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.guide-section__image img {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    object-fit: cover;
+}
+
+@media (max-width: 720px) {
+    .guide-hero__image {
+        justify-content: center;
+    }
+    .guide-hero__image img {
+        max-width: 260px;
+    }
+    .guide-section__image {
+        justify-content: center;
+    }
+}

@@ -61,6 +61,8 @@ const shippingAddressInput = document.getElementById('shipping-address');
 const checkoutModal = document.getElementById('checkout-modal');
 const checkoutSummary = document.getElementById('checkout-summary');
 const checkoutPdf = document.getElementById('checkout-pdf');
+const navSessionText = document.getElementById('nav-session-text');
+const cartCountBadge = document.getElementById('cart-count-badge');
 
 // InicializaciÃ³n de la aplicaciÃ³n
 document.addEventListener('DOMContentLoaded', async () => {
@@ -251,13 +253,19 @@ async function loadCart() {
 function updateCartSummary() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cart.reduce((sum, item) => sum + (item.product.Precio * item.quantity), 0);
-    
-    document.getElementById('cart-summary').innerHTML = `
-        <p>${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}</p>
-        <p>Total: ${formatCLP(totalPrice)}</p>
-    `;
+
+    const cartSummary = document.getElementById('cart-summary');
+    if (cartSummary) {
+        cartSummary.innerHTML = `
+            <p>${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}</p>
+            <p>Total: ${formatCLP(totalPrice)}</p>
+        `;
+    }
     const heroTotal = document.getElementById('hero-total');
     if (heroTotal) heroTotal.textContent = `${formatCLP(totalPrice)}`;
+    if (cartCountBadge) {
+        cartCountBadge.textContent = totalItems;
+    }
     
     // Mostrar/ocultar secciÃ³n de checkout segÃºn si hay items
     document.getElementById('checkout-section').style.display = 
@@ -718,12 +726,26 @@ function updateUI() {
         logoutBtn.style.display = 'inline-block';
         loginLink.style.display = 'none';
         registerLink.style.display = 'none';
+        if (navSessionText) {
+            navSessionText.textContent = currentUser.Nombre || 'Mi cuenta';
+        }
     } else {
         welcomeMessage.textContent = '';
         logoutBtn.style.display = 'none';
         loginLink.style.display = 'inline-block';
         registerLink.style.display = 'inline-block';
+        if (navSessionText) {
+            navSessionText.textContent = 'Inicia sesion';
+        }
     }
+}
+
+function handleNavSession() {
+    if (currentUser) {
+        showTab('orders');
+        return;
+    }
+    showModal('loginModal');
 }
 
 function showTab(tabId) {
@@ -825,8 +847,6 @@ async function downloadInvoice(orderId) {
         showMessage(error.message || "Error al descargar boleta", "error");
     }
 }
-
-
 
 
 

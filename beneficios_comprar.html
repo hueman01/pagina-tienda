@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beneficios de Comprar | Mi Tienda Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="info-page beneficios-page">
+    <header>
+        <div class="brand">
+            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo">
+            <h1>Centro de Información</h1>
+        </div>
+        <div class="info-actions">
+            <a class="btn-primary" href="index.html"><i class="fas fa-store"></i> Volver a la tienda</a>
+        </div>
+    </header>
+
+    <main class="info-main beneficios-main">
+        <section class="beneficios-hero">
+            <div class="beneficios-hero__label">
+                <i class="fas fa-sparkles"></i>
+                Compra más fácil con nosotros
+            </div>
+            <p class="beneficios-hero__intro" data-field="beneficiosComprar">
+                Consulta el stock en línea de todas nuestras tiendas, compra desde tu computador o celular y elige la opción que más te acomode: retiro en tienda o despacho a domicilio.
+            </p>
+        </section>
+
+        <section class="beneficios-list">
+            <article class="beneficio-card">
+                <div class="beneficio-icon">
+                    <svg class="beneficio-logo" viewBox="0 0 240 80" role="img" aria-label="BancoEstado">
+                        <rect x="2" y="2" width="76" height="76" rx="10" fill="#1f7a3a" />
+                        <path d="M18 40h44" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M40 18v44" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+                        <text x="94" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#1f7a3a">BancoEstado</text>
+                    </svg>
+                </div>
+                <div class="beneficio-body">
+                    <div class="beneficio-header">
+                        <span>Aprovecha estos beneficios con BancoEstado en todos nuestros productos</span>
+                    </div>
+                    <div class="beneficio-content" data-field="beneficiosBancoEstado">
+                        <p>4 a 24 cuotas sin interés pagando con tarjetas de crédito BancoEstado.</p>
+                        <p>Promoción válida hasta el 31 de diciembre de 2025. Monto mínimo $100.000 con CMR o tarjetas bancarias.</p>
+                        <small>*No aplica para compras con tarjetas empresa.</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="beneficio-card">
+                <div class="beneficio-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="beneficio-body">
+                    <div class="beneficio-header">
+                        <span>Compra online y retira de inmediato en tienda</span>
+                    </div>
+                    <div class="beneficio-content" data-field="beneficiosRetiro">
+                        <p>Elige la opción retiro en tienda y retira tu compra en la sucursal seleccionada.</p>
+                        <p>Te informaremos por correo cuando tu pedido esté listo para retiro.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="beneficio-card">
+                <div class="beneficio-icon">
+                    <i class="fas fa-boxes-stacked"></i>
+                </div>
+                <div class="beneficio-body">
+                    <div class="beneficio-header">
+                        <span>Stock en línea en todas las tiendas de Chile</span>
+                    </div>
+                    <div class="beneficio-content" data-field="beneficiosStock">
+                        <p>Consulta disponibilidad en tiempo real por tienda y reserva con seguridad.</p>
+                        <p>La información se actualiza automáticamente cada pocos minutos.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="beneficio-card">
+                <div class="beneficio-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="beneficio-body">
+                    <div class="beneficio-header">
+                        <span>Compra online con despacho a domicilio</span>
+                    </div>
+                    <div class="beneficio-content" data-field="beneficiosDespacho">
+                        <p>Recibe tus productos en la comodidad de tu hogar con seguimiento en línea.</p>
+                        <p>Despachos disponibles en todo Chile con tiempos estimados según región.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="info-meta">
+            <p id="info-updated"></p>
+            <p id="info-error" class="info-error"></p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-col footer-col-brand">
+                <div class="footer-logo">
+                    <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="footer-logo-img">
+                    <span class="footer-logo-text">Mi Tienda Online</span>
+                </div>
+                <button class="footer-btn">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Encuentra tu tienda
+                </button>
+                <div class="footer-contact">
+                    <div class="footer-contact-title">
+                        <i class="fas fa-headset"></i>
+                        Ventas
+                    </div>
+                    <a href="tel:+56225600040" class="footer-contact-link">+56 2 2560 0040</a>
+                </div>
+                <div class="footer-newsletter">
+                    <p>Obtén ofertas y promociones exclusivas.</p>
+                    <div class="footer-newsletter-form">
+                        <input type="email" placeholder="Tu correo" aria-label="Correo para ofertas">
+                        <button type="button">Suscríbete</button>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <span>Síguenos</span>
+                    <div class="footer-social-icons">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Mundo Mi Tienda</h3>
+                <ul>
+                    <li><a href="#">Gamer Zone</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Outlet tecnológico</a></li>
+                    <li><a href="#">Vuelta a clases</a></li>
+                    <li><a href="#">Día de la Madre</a></li>
+                    <li><a href="#">Día del Padre</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>¿Necesitas ayuda?</h3>
+                <ul>
+                    <li><a href="centro_ayuda.html">Centro de ayuda</a></li>
+                    <li><a href="preguntas_frecuentes.html">Preguntas frecuentes</a></li>
+                    <li><a href="ter_con.html">Términos y condiciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Acerca de nosotros</h3>
+                <ul>
+                    <li><a href="quienes_somos.html">Quiénes somos</a></li>
+                    <li><a href="beneficios_comprar.html">Beneficios de comprar</a></li>
+                    <li><a href="privacidad_seguridad.html">Privacidad y seguridad</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="consejos_tecnologicos.html">Consejos tecnológicos</a></li>
+                    <li><a href="puntos_verdes.html">Puntos verdes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2025 Mi Tienda Online. Todos los derechos reservados.</p>
+            <p>Prohibida su copia parcial o total bajo la ley nacional e internacional.</p>
+        </div>
+    </footer>
+
+    <script src="info.js"></script>
+</body>
+</html>

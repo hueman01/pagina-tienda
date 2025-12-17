@@ -32,7 +32,29 @@
             <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
             <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar SesiÃ³n</a>
         </div>
-</nav>
+        <div class="nav-actions">
+            <div class="nav-block nav-greeting">
+                <span class="nav-block-label">Hola,</span>
+                <button class="nav-session" onclick="handleNavSession()">
+                    <span id="nav-session-text">Inicia sesion</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <button class="nav-block nav-link-ghost" onclick="showTab('orders')">
+                <span class="nav-block-title">Mis compras</span>
+            </button>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <button class="nav-icon-btn" aria-label="Favoritos">
+                <i class="far fa-bookmark"></i>
+            </button>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <button class="nav-cart" onclick="showTab('cart-tab')" aria-label="Ver carrito">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count-badge" class="cart-badge">0</span>
+            </button>
+        </div>
+    </nav>
 
         <section class="hero">
         <div class="hero-content">
@@ -105,16 +127,6 @@
                 <div class="login-prompt">Por favor inicie sesion para ver su historial de pedidos</div>
             </div>
         </div>
-    </div>
-
-    <!-- Carrito flotante -->
-    <div class="cart-floating">
-        <h3><i class="fas fa-shopping-cart"></i> Carrito</h3>
-        <div id="cart-summary">
-            <p>0 productos</p>
-            <p>Total: $0.00</p>
-        </div>
-        <button class="view-cart-btn" onclick="showTab('cart-tab')"><i class="fas fa-eye"></i> Ver Carrito</button>
     </div>
 
     <!-- Modal de Registro -->
@@ -204,7 +216,7 @@
         </div>
     </div>
 
-    <footer class="footer">
+        <footer class="footer">
         <div class="footer-top">
             <div class="footer-col footer-col-brand">
                 <div class="footer-logo">
@@ -244,41 +256,35 @@
                 <ul>
                     <li><a href="#">Gamer Zone</a></li>
                     <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Outlet tecnológico</a></li>
+                    <li><a href="#">Outlet tecnologico</a></li>
                     <li><a href="#">Vuelta a clases</a></li>
-                    <li><a href="#">Día de la Madre</a></li>
-                    <li><a href="#">Día del Padre</a></li>
+                    <li><a href="#">Dia de la Madre</a></li>
+                    <li><a href="#">Dia del Padre</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>¿Necesitas ayuda?</h3>
+                <h3>&iquest;Necesitas ayuda?</h3>
                 <ul>
-                    <li><a href="info.html#centro-ayuda">Centro de ayuda</a></li>
-                    <li><a href="info.html#estado-despacho">Estado de mi despacho</a></li>
-                    <li><a href="info.html#revisa-boleta">Revisa tu boleta</a></li>
-                    <li><a href="info.html#orden-servicio">Orden de servicio</a></li>
-                    <li><a href="info.html#preguntas-frecuentes">Preguntas frecuentes</a></li>
-                    <li><a href="info.html#terminos-condiciones">Términos y condiciones</a></li>
+                    <li><a href="centro_ayuda.html">Centro de ayuda</a></li>
+                    <li><a href="preguntas_frecuentes.html">Preguntas frecuentes</a></li>
+                    <li><a href="ter_con.html">Terminos y condiciones</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Acerca de nosotros</h3>
                 <ul>
-                    <li><a href="info.html#quienes-somos">Quiénes somos</a></li>
-                    <li><a href="info.html#beneficios-comprar">Beneficios de comprar</a></li>
-                    <li><a href="info.html#privacidad-seguridad">Privacidad y seguridad</a></li>
-                    <li><a href="info.html#sustentabilidad">Sustentabilidad</a></li>
-                    <li><a href="info.html#bases-promociones">Bases y promociones</a></li>
+                    <li><a href="quienes_somos.html">Quienes somos</a></li>
+                    <li><a href="beneficios_comprar.html">Beneficios de comprar</a></li>
+                    <li><a href="privacidad_seguridad.html">Privacidad y seguridad</a></li>
+                    <li><a href="consejos_tecnologicos.html">Consejos tecnologicos</a></li>
+                    <li><a href="puntos_verdes.html">Puntos verdes</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Servicios</h3>
                 <ul>
-                    <li><a href="info.html#consejos-tecnologicos">Consejos tecnológicos</a></li>
-                    <li><a href="info.html#asesorate-online">Asesórate online</a></li>
-                    <li><a href="info.html#arma-tu-pc">Arma tu PC</a></li>
-                    <li><a href="info.html#puntos-verdes">Puntos verdes</a></li>
-                    <li><a href="info.html#ventas-empresas">Ventas empresas</a></li>
+                    <li><a href="consejos_tecnologicos.html">Consejos tecnologicos</a></li>
+                    <li><a href="puntos_verdes.html">Puntos verdes</a></li>
                 </ul>
             </div>
         </div>
@@ -290,5 +296,8 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
 
 
