@@ -9,54 +9,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="brand">
-            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo">
-            <h1>Mi Tienda Online</h1>
-        </div>
-        <div id="user-info">
-            <span id="welcome-message"></span>
-            <button id="logout-btn" class="btn-logout" style="display: none;">
-                <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
-            </button>
-        </div>
-    </header>
-    <nav>
-        <button class="nav-toggle" onclick="toggleNav()" aria-label="Abrir menÃº de navegaciÃ³n">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-links">
-            <a href="#" onclick="showTab('products')"><i class="fas fa-box-open"></i> Productos</a>
-            <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
-            <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
-            <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
-            <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar SesiÃ³n</a>
-        </div>
-        <div class="nav-actions">
-            <div class="nav-block nav-greeting">
-                <span class="nav-block-label">Hola,</span>
+        <header class="topbar">
+        <nav class="main-nav">
+            <div class="nav-left">
+                <a class="nav-brand" href="#">
+                    <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo nav-logo">
+                    <span class="brand-name">Mi Tienda Online</span>
+                </a>
+            </div>
+
+            <div class="nav-search">
+                <input type="text" id="search-input" placeholder="Busca aquí la tecnología para ti">
+                <button onclick="searchProducts()" aria-label="Buscar"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="nav-right">
                 <button class="nav-session" onclick="handleNavSession()">
-                    <span id="nav-session-text">Inicia sesion</span>
+                    <span class="nav-block-label">Hola,</span>
+                    <span class="nav-block-title" id="nav-session-text">Inicia sesion</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
+                <button class="nav-link-ghost" onclick="showTab('orders')">
+                    <span class="nav-block-title">Mis compras</span>
+                </button>
+                <button class="nav-mobile-session" id="nav-mobile-session" onclick="handleNavSession()">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="nav-mobile-session-text">Iniciar sesión</span>
+                </button>
+                <button class="nav-cart" onclick="showTab('cart-tab')" aria-label="Ver carrito">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count-badge" class="cart-badge">0</span>
+                </button>
+                <button id="nav-logout-inline" class="nav-logout btn-logout" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesion
+                </button>
             </div>
-            <span class="nav-divider" aria-hidden="true"></span>
-            <button class="nav-block nav-link-ghost" onclick="showTab('orders')">
-                <span class="nav-block-title">Mis compras</span>
-            </button>
-            <span class="nav-divider" aria-hidden="true"></span>
-            <button class="nav-icon-btn" aria-label="Favoritos">
-                <i class="far fa-bookmark"></i>
-            </button>
-            <span class="nav-divider" aria-hidden="true"></span>
-            <button class="nav-cart" onclick="showTab('cart-tab')" aria-label="Ver carrito">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count-badge" class="cart-badge">0</span>
-            </button>
-        </div>
-    </nav>
 
-        <section class="hero">
+            <div class="nav-links">
+                <a href="#" onclick="showTab('products')"><i class="fas fa-box-open"></i> Productos</a>
+                <a href="#" onclick="showTab('cart-tab')"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                <a href="#" onclick="showTab('orders')"><i class="fas fa-history"></i> Mis Pedidos</a>
+                <a href="#" onclick="showModal('registerModal')" id="register-link"><i class="fas fa-user-plus"></i> Registrarse</a>
+                <a href="#" onclick="showModal('loginModal')" id="login-link"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                <button id="logout-btn" class="btn-logout" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                </button>
+                <span id="welcome-message" class="welcome-inline"></span>
+            </div>
+        </nav>
+    </header>
+<section class="hero">
         <div class="hero-content">
             <p class="eyebrow">Disponible 24/7 • Entregas rápidas</p>
             <h1>Explora, elige y recibe <span>tech</span> sin complicaciones.</h1>
@@ -76,10 +78,7 @@
                     <p class="eyebrow">CatÃ¡logo</p>
                     <h2>Productos</h2>
                 </div>
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Buscar productos...">
-                    <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
-                </div>
+
             </div>
             <div id="product-list" class="product-grid">
                 <!-- Los productoss se cargarÃ¡n aquÃ­ mediante JavaScript -->
@@ -296,7 +295,6 @@
     <script src="script.js"></script>
 </body>
 </html>
-
 
 
 

@@ -56,12 +56,15 @@ function formatLastModifiedVersion() {
 const loginLink = document.getElementById('login-link');
 const registerLink = document.getElementById('register-link');
 const logoutBtn = document.getElementById('logout-btn');
+const navLogoutBtn = document.getElementById('nav-logout-inline');
 const welcomeMessage = document.getElementById('welcome-message');
 const shippingAddressInput = document.getElementById('shipping-address');
 const checkoutModal = document.getElementById('checkout-modal');
 const checkoutSummary = document.getElementById('checkout-summary');
 const checkoutPdf = document.getElementById('checkout-pdf');
 const navSessionText = document.getElementById('nav-session-text');
+const navMobileSessionBtn = document.getElementById('nav-mobile-session');
+const navMobileSessionText = document.getElementById('nav-mobile-session-text');
 const cartCountBadge = document.getElementById('cart-count-badge');
 
 // InicializaciÃ³n de la aplicaciÃ³n
@@ -99,9 +102,12 @@ function setupEventListeners() {
         await loginUser();
     });
     
-    // BotÃ³n de logout
+    // Botón de logout
     if (logoutBtn) {
         logoutBtn.addEventListener('click', logout);
+    }
+    if (navLogoutBtn) {
+        navLogoutBtn.addEventListener('click', logout);
     }
     
     // Barra de bÃºsqueda
@@ -724,18 +730,26 @@ function updateUI() {
     if (currentUser) {
         welcomeMessage.textContent = `Bienvenido, ${currentUser.Nombre}`;
         logoutBtn.style.display = 'inline-block';
-        loginLink.style.display = 'none';
-        registerLink.style.display = 'none';
+        if (navLogoutBtn) navLogoutBtn.style.display = 'flex';
+        if (loginLink) loginLink.style.display = 'none';
+        if (registerLink) registerLink.style.display = 'none';
         if (navSessionText) {
             navSessionText.textContent = currentUser.Nombre || 'Mi cuenta';
+        }
+        if (navMobileSessionText) {
+            navMobileSessionText.textContent = currentUser.Nombre || 'Mi cuenta';
         }
     } else {
         welcomeMessage.textContent = '';
         logoutBtn.style.display = 'none';
-        loginLink.style.display = 'inline-block';
-        registerLink.style.display = 'inline-block';
+        if (navLogoutBtn) navLogoutBtn.style.display = 'none';
+        if (loginLink) loginLink.style.display = 'inline-block';
+        if (registerLink) registerLink.style.display = 'inline-block';
         if (navSessionText) {
             navSessionText.textContent = 'Inicia sesion';
+        }
+        if (navMobileSessionText) {
+            navMobileSessionText.textContent = 'Inicia sesion';
         }
     }
 }
@@ -847,6 +861,12 @@ async function downloadInvoice(orderId) {
         showMessage(error.message || "Error al descargar boleta", "error");
     }
 }
+
+
+
+
+
+
 
 
 
