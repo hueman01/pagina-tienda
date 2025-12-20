@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,31 +8,104 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="info-page">
-    <header>
-        <div class="brand">
-            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="site-logo">
-            <h1>Centro de Información</h1>
+    <main class="pv-page">
+        <header class="info-topbar">
+        <div class="info-topbar__brand">
+            <img src="logo_hh.png" alt="Logo Mi Tienda Online" class="info-topbar__logo">
+            <div>
+                <p class="eyebrow">Centro de Informacion</p>
+                <h1 class="info-topbar__title">Puntos Verdes</h1>
+            </div>
         </div>
-        <div class="info-actions">
-            <a class="btn-primary" href="index.html"><i class="fas fa-store"></i> Volver a la tienda</a>
-        </div>
+        <a class="info-topbar__link" href="index.html"><i class="fas fa-store"></i> Volver a la tienda</a>
     </header>
 
-    <main class="info-main">
-        <section class="info-hero">
-            <div>
-                <p class="eyebrow">Ayuda y transparencia</p>
-                <h2>Puntos verdes</h2>
-                <p class="subhead">Ubica puntos de reciclaje y políticas de sustentabilidad.</p>
+        <section class="pv-hero">
+            <div class="pv-hero__badge">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Puntos Verdes_</span>
             </div>
+            <p class="pv-hero__text">Identifica nuestros puntos de reciclaje y conoce a los responsables. La información principal se carga desde nuestro sistema; los mapas son referencia visual.</p>
         </section>
 
-        <section class="legal-section">
-            <div class="legal-card">
-                <header class="legal-card__header">
-                    <h3><i class="fas fa-recycle"></i> Puntos verdes</h3>
-                </header>
-                <div class="legal-card__body" data-field="puntosVerdes"></div>
+        <section class="pv-grid-section">
+            <div class="pv-grid">
+                <article class="pv-card">
+                    <div class="pv-card__map">
+                        <a href="https://www.google.com/maps/place/Avenida+Valpara%C3%ADso+459,+Vi%C3%B1a+del+Mar" target="_blank" rel="noopener">
+                            <img src="https://staticmap.openstreetmap.de/staticmap.php?center=-33.0472,-71.6127&zoom=16&size=640x360&markers=-33.0472,-71.6127,blue-pushpin" alt="Mapa Viña del Mar" loading="lazy">
+                        </a>
+                        <img class="pv-card__logo" src="logo_hh.png" alt="Logo">
+                    </div>
+                    <div class="pv-card__body">
+                        <h4>Viña del Mar</h4>
+                        <p><strong>Avenida Valparaíso 459</strong></p>
+                        <p>Lunes a Viernes - 09:30 a 19:00</p>
+                        <p>Sábado 10:00 a 14:00</p>
+                        <div class="pv-card__author">
+                            <img class="pv-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Viviana Olguín L.">
+                            <div>
+                                <strong>Viviana Olguín L.</strong><br>
+                                <small>Jefe de tienda</small>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="pv-card">
+                    <div class="pv-card__map">
+                        <a href="https://www.google.com/maps/place/Av.+Vitacura+6767,+Vitacura,+Chile" target="_blank" rel="noopener">
+                            <img src="https://staticmap.openstreetmap.de/staticmap.php?center=-33.3835,-70.5653&zoom=16&size=640x360&markers=-33.3835,-70.5653,blue-pushpin" alt="Mapa Vitacura" loading="lazy">
+                        </a>
+                        <img class="pv-card__logo" src="logo_hh.png" alt="Logo">
+                    </div>
+                    <div class="pv-card__body">
+                        <h4>Vitacura</h4>
+                        <p><strong>Avenida Vitacura 6767, Vitacura, Chile</strong></p>
+                        <p>Lunes a Viernes - 09:30 a 19:00</p>
+                        <p>Sábado 10:00 a 14:00</p>
+                        <div class="pv-card__author">
+                            <img class="pv-avatar" src="https://randomuser.me/api/portraits/men/58.jpg" alt="Patricio Catalan O.">
+                            <div>
+                                <strong>Patricio Catalan O.</strong><br>
+                                <small>Jefe de tienda</small>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="pv-card">
+                    <div class="pv-card__map">
+                        <a href="https://www.google.com/maps/place/Av.+Las+Condes+12340,+Santiago,+Vitacura,+Chile" target="_blank" rel="noopener">
+                            <img src="https://staticmap.openstreetmap.de/staticmap.php?center=-33.4010,-70.5691&zoom=16&size=640x360&markers=-33.4010,-70.5691,blue-pushpin" alt="Mapa Cantagallo" loading="lazy">
+                        </a>
+                        <img class="pv-card__logo" src="logo_hh.png" alt="Logo">
+                    </div>
+                    <div class="pv-card__body">
+                        <h4>Cantagallo</h4>
+                        <p><strong>Avenida Las Condes 12340, Santiago, Vitacura, Chile</strong></p>
+                        <p>Lunes a Viernes - 09:30 a 19:00</p>
+                        <p>Sábado 10:00 a 14:00</p>
+                        <div class="pv-card__author">
+                            <img class="pv-avatar" src="https://randomuser.me/api/portraits/men/12.jpg" alt="Davis Rojas F.">
+                            <div>
+                                <strong>Davis Rojas F.</strong><br>
+                                <small>Jefe de tienda</small>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="pv-cta">
+                ¿Qué puedes llevar a nuestros puntos de reciclaje?
+            </div>
+
+            <div class="pv-notes">
+                <p>Recibimos equipos eléctricos o electrónicos cuyo valor no supere las 15″ o que hayan cumplido su vida útil o estén juntando polvo en tu casa.</p>
+                <p>Los requisitos de entrega de productos en garantía o en taller siguen siendo los mismos que revisas en <a href="centro_ayuda.html">Centro de Ayuda</a>.</p>
+                <p>La información de puntos de reciclaje y gestores viene desde nuestro sistema; los mapas e imágenes son referencia general.</p>
+                <p>Solo se reciben productos de uso personal; no recibimos residuos eléctricos y electrónicos provenientes de empresas.</p>
             </div>
 
             <div class="info-meta">
@@ -78,17 +151,6 @@
                 </div>
             </div>
             <div class="footer-col">
-                <h3>Mundo Mi Tienda</h3>
-                <ul>
-                    <li><a href="#">Gamer Zone</a></li>
-                    <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Outlet tecnológico</a></li>
-                    <li><a href="#">Vuelta a clases</a></li>
-                    <li><a href="#">Día de la Madre</a></li>
-                    <li><a href="#">Día del Padre</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
                 <h3>¿Necesitas ayuda?</h3>
                 <ul>
                     <li><a href="centro_ayuda.html">Centro de ayuda</a></li>
@@ -121,3 +183,8 @@
     <script src="info.js"></script>
 </body>
 </html>
+
+
+
+
+
